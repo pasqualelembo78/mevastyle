@@ -68,6 +68,7 @@ const messages = {
   "text.successfullyDeleted": "Успещно удалена",
   "text.successfullyUpdated": "Успещно обновлен",
   "text.successfullyloggedIn": "Вы успешно авторизованы",
+  "text.dblClickForCrop": "Дважды щелкните по изображению, чтобы начать обрезку",
 
   "text.error.emptyName": "Имя не может быть пустым",
   "text.error.emptyTitle": "Название не может быть пустым",

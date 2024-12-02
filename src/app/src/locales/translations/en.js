@@ -70,6 +70,7 @@ const messages = {
   "text.successfullyDeleted": "Successfully deleted",
   "text.successfullyUpdated": "Successfully updated",
   "text.successfullyloggedIn": "You are successfully logged in",
+  "text.dblClickForCrop": "Double click on image to start cropping",
 
   "text.error.emptyName": "The name cannot be empty",
   "text.error.emptyTitle": "The title cannot be empty",

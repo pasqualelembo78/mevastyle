@@ -14,7 +14,6 @@ export default {
       state.mode = payload;
     },
     syncLayers(state, payload) {
-      console.log("syncLayers: ", payload);
       state.layers = payload;
       this.dispatch("order/calculatePrice");
     },

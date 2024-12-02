@@ -158,6 +158,12 @@ export default {
       "object:removed": () => this.syncLayers(this.ctx.canvas.getObjects()),
     });
 
+    this.ctx.canvas.on("mouse:dblclick", ({ target}) => {
+      if(target && target.type === 'image'){
+       CanvasService.prepareCrop(target)
+      }
+    })
+
     document.addEventListener("keydown", (e) => {
       if (
         ["Delete", "Backspace"].includes(e.key) &&

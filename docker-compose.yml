@@ -4,12 +4,13 @@ services:
   payload:
     image: node:18-alpine
     ports:
-      - '3000:3000'
+      - '3050:3050'
     volumes:
       - .:/home/node/app
       - node_modules:/home/node/app/node_modules
     working_dir: /home/node/app/
-    command: sh -c "yarn install && yarn dev"
+    build:
+      context: .
     depends_on:
       - mongo
     env_file:
@@ -25,6 +26,13 @@ services:
       - data:/data/db
     logging:
       driver: none
+
+  nginx:
+    restart: always
+    build:
+      context: ./docker/nginx
+    ports:
+      - "80:80"
 
 volumes:
   data:
