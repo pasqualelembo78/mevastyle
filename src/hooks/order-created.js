@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import AdmZip from "adm-zip";
+import JSZip from "jszip";
 
 export default async function OrderCreated({ doc, req,  operation }) {
 
@@ -8,7 +8,7 @@ export default async function OrderCreated({ doc, req,  operation }) {
     return;
   }
 
-  const zip = new AdmZip();
+  const zip = new JSZip();
   const payload = req.payload;
   const emailOpts = payload.emailOptions;
   const fabricData = JSON.parse(doc.json);
@@ -24,7 +24,7 @@ export default async function OrderCreated({ doc, req,  operation }) {
     id: doc.front
   });
 
-  zip.addFile(
+  zip.file(
     `front/${path.basename(front.filename)}`,
     fs.readFileSync(`${__dirname}/../media/${front.filename}`)
   );
@@ -36,7 +36,7 @@ export default async function OrderCreated({ doc, req,  operation }) {
       id: doc.back
     });
   
-    zip.addFile(
+    zip.file(
       `back/${path.basename(back.filename)}`,
       fs.readFileSync(`${__dirname}/../media/${back.filename}`)
     );
@@ -48,13 +48,17 @@ export default async function OrderCreated({ doc, req,  operation }) {
   );
   for(let layer of imageLayers){
     const layerPath = layer.src.replace(payload.config.serverURL, '');
-    zip.addFile(
+    zip.file(
       `layers/${path.basename(layerPath)}`,
       fs.readFileSync(`${__dirname}/../${layerPath}`)
     );
   }
 
   try {
+    const zipData = await JSZip.generateAsync();
+
+    console.log(zipData)
+
     await payload.sendEmail({
       from: `${emailOpts.fromName} <${emailOpts.fromAddress}>`,
       to: [emailOpts.transportOptions.managerEmail, doc.email],
@@ -64,7 +68,7 @@ export default async function OrderCreated({ doc, req,  operation }) {
       attachments: [
         {
           filename: 'attachments.zip',
-          content: zip.toBuffer()
+          content: zipData
         }
       ]
     });
