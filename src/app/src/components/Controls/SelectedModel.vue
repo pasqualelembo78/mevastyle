@@ -95,7 +95,7 @@
           color="primary"
           icon="shopping_basket"
           :label="$t('label.order')"
-          @click="orderModal = true"
+          @click="openOrderModal()"
           :disabled="!canOrder()"
         />
       </div>
@@ -293,6 +293,14 @@ export default {
       }
       this.loading = false;
     },
+
+    openOrderModal() {
+      if (this.user) {
+        this.orderModal = true
+      } else {
+        this.setAuthModalOpened(true);
+      }
+    }
   },
 };
 </script>

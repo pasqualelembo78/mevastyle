@@ -1,7 +1,7 @@
 import nunjucks from "nunjucks";
 import OrderCreated from "../hooks/order-created";
 import { CollectionConfig } from "payload/types";
-import { OwnerAccess } from "../access";
+import { AdminAccess, AuthorizedAccess } from "../access";
 import { AuthorField } from "../shared/fields";
 
 const Orders: CollectionConfig = {
@@ -12,10 +12,10 @@ const Orders: CollectionConfig = {
     disableDuplicate: true,
   },
   access: {
-    create: () => true,
-    read: OwnerAccess,
-    update: OwnerAccess,
-    delete: OwnerAccess,
+    create: AuthorizedAccess,
+    read: AdminAccess,
+    update: AdminAccess,
+    delete: AdminAccess,
   },
   hooks: {
     afterChange: [OrderCreated],
