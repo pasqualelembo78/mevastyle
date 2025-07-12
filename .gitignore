@@ -1,9 +1,7 @@
-build
-dist
-/src/media
-node_modules
-.DS_Store
+node_modules/
+dist/
+build/
 .env
+pm2.log
 *.log
-*.lock
-.idea
+*.pid
