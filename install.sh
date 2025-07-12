@@ -15,7 +15,7 @@ npm install -g yarn
 
 echo "==== CLONAZIONE REPO SE NON ESISTE ===="
 if [ ! -d "$APP_DIR" ]; then
-  git clone https://github.com/lmanukyan/print-designer.git "$APP_DIR"
+  git clone https://github.com/pasqualelembo78/mevastyle.git "$APP_DIR"
 fi
 
 cd "$APP_DIR"
