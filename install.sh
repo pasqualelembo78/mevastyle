@@ -9,16 +9,10 @@ PORT=3050
 echo "==== AGGIORNAMENTO SISTEMA E INSTALLAZIONE DIPENDENZE ===="
 apt update && apt upgrade -y
 apt install -y git curl build-essential nodejs npm apache2 libxml2-dev
-sudo apt install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev pkg-config
-
 
 
 echo "==== INSTALLAZIONE YARN GLOBAL ===="
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-sudo apt update
-sudo apt install --no-install-recommends yarn
-
+npm install -g yarn
 
 echo "==== CLONAZIONE REPO SE NON ESISTE ===="
 if [ ! -d "$APP_DIR" ]; then
@@ -28,19 +22,11 @@ fi
 cd "$APP_DIR"
 
 echo "==== INSTALLAZIONE DIPENDENZE ===="
-cd /var/www/mevastyle.it/src/app
-yarn install
-yarn build
-
-cd /var/www/mevastyle.it
 yarn install
 yarn install:app
-yarn dev
-yarn dev:app
-
 
 echo "==== COMPILAZIONE TYPESCRIPT ===="
-
+yarn build
 
 echo "==== CONFIGURAZIONE .env ===="
 cp -n .env.example .env
