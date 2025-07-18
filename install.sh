@@ -12,7 +12,11 @@ apt install -y git curl build-essential nodejs npm apache2 libxml2-dev
 
 
 echo "==== INSTALLAZIONE YARN GLOBAL ===="
-npm install -g yarn
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt update
+sudo apt install --no-install-recommends yarn
+
 
 echo "==== CLONAZIONE REPO SE NON ESISTE ===="
 if [ ! -d "$APP_DIR" ]; then
