@@ -8,7 +8,8 @@ PORT=3050
 
 echo "==== AGGIORNAMENTO SISTEMA E INSTALLAZIONE DIPENDENZE ===="
 apt update && apt upgrade -y
-apt install -y git curl build-essential nodejs npm apache2 libapache2-mod-proxy-html libxml2-dev
+apt install -y git curl build-essential nodejs npm apache2 libxml2-dev
+
 
 echo "==== INSTALLAZIONE YARN GLOBAL ===="
 npm install -g yarn
