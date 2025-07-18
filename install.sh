@@ -28,11 +28,18 @@ fi
 cd "$APP_DIR"
 
 echo "==== INSTALLAZIONE DIPENDENZE ===="
+cd /var/www/mevastyle.it/src/app
 yarn install
+yarn build
+
+cd /var/www/mevastyle.it
+yarn build:payload
+yarn build:server
+
 yarn install:app
 
 echo "==== COMPILAZIONE TYPESCRIPT ===="
-yarn build
+
 
 echo "==== CONFIGURAZIONE .env ===="
 cp -n .env.example .env
