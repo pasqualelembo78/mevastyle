@@ -33,10 +33,11 @@ yarn install
 yarn build
 
 cd /var/www/mevastyle.it
-yarn build:payload
-yarn build:server
-
+yarn install
 yarn install:app
+yarn dev
+yarn dev:app
+
 
 echo "==== COMPILAZIONE TYPESCRIPT ===="
 
