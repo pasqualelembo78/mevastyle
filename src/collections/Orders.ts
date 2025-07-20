@@ -11,12 +11,12 @@ const Orders: CollectionConfig = {
     useAsTitle: "title",
     disableDuplicate: true,
   },
-  access: {
-    create: AuthorizedAccess,
-    read: AdminAccess,
-    update: AdminAccess,
-    delete: AdminAccess,
-  },
+ access: {
+  create: () => true,
+  read: AdminAccess,
+  update: AdminAccess,
+  delete: AdminAccess,
+},
   hooks: {
     afterChange: [OrderCreated],
   },

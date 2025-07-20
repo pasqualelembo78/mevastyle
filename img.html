@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Visualizza JSON come immagine con Fabric.js</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>
+  <style>
+    canvas { border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+
+<canvas id="canvas" width="600" height="400"></canvas>
+
+<script>
+  // JSON da te fornito
+  const jsonData = {
+    "sizes":{"xs":0,"s":0,"m":0,"l":0,"xl":"10","xxl":0},
+    "model":{
+      "front":{
+        "id":"687a833287e8fc1e13cdc14e",
+        "author":{
+          "id":"6872dd3dd88c7df46648f29e",
+          "name":"Pasquale Lembo",
+          "role":"admin",
+          "email":"lembopasquale78@gmail.com",
+          "createdAt":"2025-07-12T22:10:05.749Z",
+          "updatedAt":"2025-07-13T18:58:57.108Z",
+          "locked":false,
+          "loginAttempts":0
+        },
+        "filename":"fronte-melillo-1.png",
+        "mimeType":"image/png",
+        "filesize":292660,
+        "width":579,
+        "height":700,
+        "focalX":50,
+        "focalY":50,
+        "createdAt":"2025-07-18T17:24:02.338Z",
+        "updatedAt":"2025-07-18T17:24:02.338Z",
+        "url":"https://www.mevastyle.it/media/fronte-melillo-1.png"
+      },
+      "id":"687a82e946d76d054a552809"
+    },
+    "canvasData":{
+      "version":"5.5.2",
+      "objects":[],
+      "backgroundImage":{
+        "type":"image",
+        "version":"5.5.2",
+        "originX":"center",
+        "originY":"center",
+        "left":300,
+        "top":280,
+        "width":579,
+        "height":700,
+        "fill":"rgb(0,0,0)",
+        "stroke":null,
+        "strokeWidth":0,
+        "strokeDashArray":null,
+        "strokeLineCap":"butt",
+        "strokeDashOffset":0,
+        "strokeLineJoin":"miter",
+        "strokeUniform":false,
+        "strokeMiterLimit":4,
+        "scaleX":0.93,
+        "scaleY":0.72,
+        "angle":0,
+        "flipX":false,
+        "flipY":false,
+        "opacity":1,
+        "shadow":null,
+        "visible":true,
+        "backgroundColor":"",
+        "fillRule":"nonzero",
+        "paintFirst":"fill",
+        "globalCompositeOperation":"source-over",
+        "skewX":0,
+        "skewY":0,
+        "cropX":0,
+        "cropY":0,
+        "src":"https://www.mevastyle.it/media/fronte-melillo-1.png",
+        "crossOrigin":"anonymous",
+        "filters":[]
+      }
+    }
+  };
+
+  // Inizializzo Fabric canvas
+  const canvas = new fabric.Canvas('canvas');
+
+  // Carico l'immagine come background
+  fabric.Image.fromURL(jsonData.canvasData.backgroundImage.src, function(img) {
+    img.set({
+      originX: jsonData.canvasData.backgroundImage.originX,
+      originY: jsonData.canvasData.backgroundImage.originY,
+      left: jsonData.canvasData.backgroundImage.left,
+      top: jsonData.canvasData.backgroundImage.top,
+      scaleX: jsonData.canvasData.backgroundImage.scaleX,
+      scaleY: jsonData.canvasData.backgroundImage.scaleY,
+      opacity: jsonData.canvasData.backgroundImage.opacity
+    });
+    canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+  }, { crossOrigin: 'anonymous' });
+
+</script>
+
+</body>
+</html>
