@@ -13,6 +13,11 @@ apt install -y git curl build-essential nodejs npm apache2 libxml2-dev
 
 echo "==== INSTALLAZIONE YARN GLOBAL ===="
 npm install -g yarn
+npm install -g pm2
+apt install -y mongodb
+systemctl start mongodb
+systemctl enable mongodb
+
 
 echo "==== CLONAZIONE REPO SE NON ESISTE ===="
 if [ ! -d "$APP_DIR" ]; then
@@ -29,7 +34,7 @@ echo "==== COMPILAZIONE TYPESCRIPT ===="
 yarn build
 
 echo "==== CONFIGURAZIONE .env ===="
-cp -n .env.example .env
+# cp -n .env.example .env
 
 # Imposta variabili ambiente se non presenti
 grep -qxF "PAYLOAD_CONFIG_PATH=dist/payload.config.js" .env || echo "PAYLOAD_CONFIG_PATH=dist/payload.config.js" >> .env
