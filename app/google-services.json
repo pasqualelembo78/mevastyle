@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1019559684452",
+    "project_id": "mevas-35761",
+    "storage_bucket": "mevas-35761.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1019559684452:android:d385efec2294f229e1f271",
+        "android_client_info": {
+          "package_name": "com.mevastyle.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1019559684452-irq8hlbijb08d35tluaraanpchmu1fef.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mevastyle.app",
+            "certificate_hash": "776fe6c3204f02bd1b5a44180fe4e637b8474462"
+          }
+        },
+        {
+          "client_id": "1019559684452-as9a08427282kn49ctaimomnjcd5ikg1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgbijK2tHOE-CiBopu9eY9tXbAZqxFXao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1019559684452-as9a08427282kn49ctaimomnjcd5ikg1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
