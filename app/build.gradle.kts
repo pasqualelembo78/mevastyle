@@ -9,19 +9,20 @@ plugins {
 
 android {
     namespace = "com.mevastyle.app"
-    compileSdk = 34
+    compileSdk = 34   // AGP 8.3.0 supporta max compileSdk=34; aggiorna AGP per usare 35
 
     defaultConfig {
         applicationId = "com.mevastyle.app"
         minSdk = 26
-        targetSdk = 34
-        versionCode = 3
-        versionName = "3.0"
+        targetSdk = 34  // aggiorna ad AGP 8.5+ per targetSdk=35
+        versionCode = 4  // incrementa ad ogni release Play Store
+        versionName = "3.1"
     }
 
     signingConfigs {
         create("release") {
             val keystoreProperties = Properties()
+            // IMPORTANTE: keystore.properties NON deve essere nel repo Git.
             val keystoreFile = rootProject.file("keystore.properties")
             if (keystoreFile.exists()) {
                 keystoreProperties.load(keystoreFile.inputStream())
@@ -34,8 +35,17 @@ android {
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix = ".debug"
+            isDebuggable = true
+        }
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true       // R8: offusca e riduce il codice
+            isShrinkResources = true     // rimuove risorse inutilizzate
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
             signingConfig = signingConfigs.getByName("release")
         }
     }
@@ -47,6 +57,13 @@ android {
     kotlinOptions { jvmTarget = "17" }
     buildFeatures { compose = true }
     composeOptions { kotlinCompilerExtensionVersion = "1.5.8" }
+
+    // Ottimizzazione bundle per Play Store
+    bundle {
+        language { enableSplit = true }
+        density { enableSplit = true }
+        abi { enableSplit = true }
+    }
 }
 
 dependencies {
@@ -86,4 +103,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+
+    // Browser (per aprire Privacy Policy/ToS dall'app)
+    implementation("androidx.browser:browser:1.8.0")
 }

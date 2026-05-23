@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Regole di backup: escludiamo dati sensibili (Room DB, SharedPreferences
+    con token) dal backup automatico di Android/Google.
+    Permette comunque il backup delle bozze dell'utente.
+-->
+<full-backup-content>
+    <!-- Escludi database Room (verrà ricreato dal cloud) -->
+    <exclude domain="database" path="mevastyle_projects.db" />
+    <exclude domain="database" path="mevastyle_projects.db-shm" />
+    <exclude domain="database" path="mevastyle_projects.db-wal" />
+    <!-- Escludi SharedPreferences con credenziali -->
+    <exclude domain="sharedpref" path="com.google.android.gms.signin.prefs.xml" />
+</full-backup-content>

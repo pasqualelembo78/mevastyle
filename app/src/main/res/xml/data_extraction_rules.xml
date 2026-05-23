@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="database" path="mevastyle_projects.db" />
+        <exclude domain="database" path="mevastyle_projects.db-shm" />
+        <exclude domain="database" path="mevastyle_projects.db-wal" />
+        <exclude domain="sharedpref" path="com.google.android.gms.signin.prefs.xml" />
+    </cloud-backup>
+    <device-transfer>
+        <!-- Consenti il trasferimento delle bozze tra dispositivi -->
+        <include domain="database" path="." />
+    </device-transfer>
+</data-extraction-rules>

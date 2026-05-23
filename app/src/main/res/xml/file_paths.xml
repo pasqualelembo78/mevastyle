@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<paths><cache-path name="cache" path="."/></paths>
+<paths>
+    <!-- Cache interna app (export temporanei) -->
+    <cache-path name="cache" path="." />
+    <!-- File interni app -->
+    <files-path name="files" path="." />
+    <!-- Storage esterno per le immagini esportate (Download) -->
+    <external-files-path name="external_files" path="." />
+</paths>

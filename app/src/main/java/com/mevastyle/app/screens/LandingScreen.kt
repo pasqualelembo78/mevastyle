@@ -1,4 +1,5 @@
 package com.mevastyle.app.screens
+
 import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -21,14 +22,33 @@ import com.mevastyle.app.data.AuthManager
 import com.mevastyle.app.ui.theme.*
 
 @Composable
-fun LandingScreen(onStart: () -> Unit, onDrafts: () -> Unit, onCreations: () -> Unit,
-    onAdmin: () -> Unit, onLogin: () -> Unit, onLogout: () -> Unit, onUpload: () -> Unit = {}, onModels: () -> Unit = {}, isAdmin: Boolean) {
+fun LandingScreen(
+    onStart: () -> Unit,
+    onDrafts: () -> Unit,
+    onCreations: () -> Unit,
+    onAdmin: () -> Unit,
+    onLogin: () -> Unit,
+    onLogout: () -> Unit,
+    onUpload: () -> Unit = {},
+    onModels: () -> Unit = {},
+    onPrivacyPolicy: () -> Unit,
+    onTerms: () -> Unit,
+    isAdmin: Boolean
+) {
     val ctx = LocalContext.current
     val logo = remember { ctx.assets.open("mevastyle_logo.png").use { BitmapFactory.decodeStream(it) } }
     val user = AuthManager.currentUser
 
-    Column(Modifier.fillMaxSize().padding(32.dp), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-        Image(logo.asImageBitmap(), "MevaStyle", Modifier.fillMaxWidth(0.85f).padding(bottom = 8.dp), contentScale = ContentScale.FillWidth)
+    Column(
+        Modifier.fillMaxSize().padding(32.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            logo.asImageBitmap(), "MevaStyle",
+            Modifier.fillMaxWidth(0.85f).padding(bottom = 8.dp),
+            contentScale = ContentScale.FillWidth
+        )
         Spacer(Modifier.height(4.dp))
         if (user != null) {
             Text("Ciao, ${user.displayName ?: user.email ?: "Utente"}!", fontSize = 14.sp, color = Primary, fontWeight = FontWeight.SemiBold)
@@ -38,7 +58,8 @@ fun LandingScreen(onStart: () -> Unit, onDrafts: () -> Unit, onCreations: () -> 
         Text("Crea la tua maglietta personalizzata", fontSize = 16.sp, color = TextSecondary, textAlign = TextAlign.Center)
         Spacer(Modifier.height(32.dp))
 
-        Button(onClick = onStart, colors = ButtonDefaults.buttonColors(containerColor = Primary), modifier = Modifier.fillMaxWidth().height(56.dp)) {
+        Button(onClick = onStart, colors = ButtonDefaults.buttonColors(containerColor = Primary),
+            modifier = Modifier.fillMaxWidth().height(56.dp)) {
             Icon(Icons.Default.Add, null, Modifier.size(20.dp)); Spacer(Modifier.width(8.dp))
             Text("Crea nuova maglietta", fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
         }
@@ -66,18 +87,41 @@ fun LandingScreen(onStart: () -> Unit, onDrafts: () -> Unit, onCreations: () -> 
         }
         if (isAdmin) {
             Spacer(Modifier.height(10.dp))
-            Button(onClick = onAdmin, colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF8B5CF6)), modifier = Modifier.fillMaxWidth().height(52.dp)) {
+            Button(onClick = onAdmin, colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF8B5CF6)),
+                modifier = Modifier.fillMaxWidth().height(52.dp)) {
                 Icon(Icons.Default.AdminPanelSettings, null, Modifier.size(20.dp)); Spacer(Modifier.width(8.dp))
                 Text("Admin Panel", fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
             }
         }
         Spacer(Modifier.height(24.dp))
-        if (user != null) TextButton(onClick = onLogout) {
-            Icon(Icons.Default.Logout, null, Modifier.size(16.dp), tint = TextSecondary); Spacer(Modifier.width(4.dp))
-            Text("Disconnetti (${user.email})", color = TextSecondary, fontSize = 12.sp)
-        } else TextButton(onClick = onLogin) {
-            Icon(Icons.Default.Login, null, Modifier.size(16.dp), tint = Primary); Spacer(Modifier.width(4.dp))
-            Text("Accedi con Google", color = Primary, fontSize = 14.sp)
+
+        if (user != null) {
+            TextButton(onClick = onLogout) {
+                Icon(Icons.Default.Logout, null, Modifier.size(16.dp), tint = TextSecondary)
+                Spacer(Modifier.width(4.dp))
+                Text("Disconnetti (${user.email})", color = TextSecondary, fontSize = 12.sp)
+            }
+        } else {
+            TextButton(onClick = onLogin) {
+                Icon(Icons.Default.Login, null, Modifier.size(16.dp), tint = Primary)
+                Spacer(Modifier.width(4.dp))
+                Text("Accedi con Google", color = Primary, fontSize = 14.sp)
+            }
+        }
+
+        // Footer Privacy & ToS — navigazione interna
+        Spacer(Modifier.height(16.dp))
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            TextButton(onClick = onPrivacyPolicy, contentPadding = PaddingValues(horizontal = 4.dp, vertical = 0.dp)) {
+                Text("Privacy Policy", fontSize = 11.sp, color = TextSecondary)
+            }
+            Text("·", fontSize = 11.sp, color = TextSecondary, modifier = Modifier.align(Alignment.CenterVertically))
+            TextButton(onClick = onTerms, contentPadding = PaddingValues(horizontal = 4.dp, vertical = 0.dp)) {
+                Text("Termini di Servizio", fontSize = 11.sp, color = TextSecondary)
+            }
         }
     }
 }
